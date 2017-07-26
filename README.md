@@ -1,0 +1,2 @@
+# CWK
+Czasowy Wyłącznik Komputera
