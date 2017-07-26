@@ -103,6 +103,12 @@ class Application(Frame):
                               relief='solid', bd=3, command=self.turn_off)
         self.execute.grid(row=9, column=0, sticky=E, pady=(15, 5), padx=(2, 5))
 
+    def ENTER_press(self, event):
+        self.turn_off()
+
+    def ESC_press(self, event):
+        self.enable_widgets()
+
     def disable_widgets(self):
         self.execute.configure(state=DISABLED)
         self.input_time.configure(state=DISABLED)
@@ -183,7 +189,6 @@ class Application(Frame):
             self.stop_execute.configure(state="normal")
             self.count_down(int_shutdown)
 
-
 if __name__ == '__main__':
     root = Tk()
     root.title("Czasowy wyłącznik komputera")
@@ -191,4 +196,6 @@ if __name__ == '__main__':
     root.config(bg="#2C3E50")
     app = Application(root)
     app.configure(background='#2C3E50')
+    root.bind('<Return>', app.ENTER_press)
+    root.bind('<Escape>', app.ESC_press)
     root.mainloop()
