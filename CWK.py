@@ -12,8 +12,6 @@ FONT_18 = ('Consolas', 18)
 FONT_24 = ('Consolas', 24)
 FONT_32 = ('Consolas', 32)
 FONT_36 = ('Consolas', 36)
-# flat, groove, raised, ridge, solid, or sunken
-
 
 class Application(Frame):
     def __init__(self, master):
@@ -74,11 +72,8 @@ class Application(Frame):
 
     def check_option(self):
         self.option = IntVar()
-        s = ttk.Style()  # Creating style element
-        s.configure('Wild.TRadiobutton',    # First argument is the name of style. Needs to end with: .TRadiobutton
-                    background="#2C3E50",   # Setting background to our specified color above
-                    foreground="white",
-                    font=FONT_11)     # You can define colors like this also
+        s = ttk.Style()
+        s.configure('Wild.TRadiobutton', background="#2C3E50", foreground="white", font=FONT_11)
         self.first_option = ttk.Radiobutton(self, text="Wyłącz po określonym czasie",
                     variable=self.option, command=self.selection, value=1, style='Wild.TRadiobutton')
         self.first_option.grid(row=4, column=0, sticky=W)
@@ -96,7 +91,6 @@ class Application(Frame):
         self.input_time.insert(0, 'Czas')
         self.input_time.bind('<FocusIn>', self.on_entry_click)
         self.input_time.bind('<FocusOut>', self.on_focusout)
-        # self.input_time.configure(state="readonly", )
 
     def execute(self):
         self.stop_execute = Button(text="STOP", height=2, width=20, state=DISABLED,
@@ -147,8 +141,8 @@ class Application(Frame):
     def on_entry_click(self, event):
         input_content = self.input_time.get()
         if input_content == "Tylko minuty" or input_content == "Format godz:min":
-            self.input_time.delete(0, "end")  # delete all the text in the entry
-            self.input_time.insert(0, '')  # Insert blank for user input
+            self.input_time.delete(0, "end")
+            self.input_time.insert(0, '')
             self.execute.config(state="normal", bg="#2980B9", fg="white")
 
     def on_focusout(self, event):
@@ -174,8 +168,6 @@ class Application(Frame):
         if choice == 1:
             minutes = self.input_time.get()
             shutdown = int(minutes) * 60
-            print(shutdown)
-            print("shutdown -s -t ", shutdown)
             self.stop_function = False
             self.stop_execute.configure(state="normal")
             self.count_down(shutdown)
@@ -197,7 +189,6 @@ if __name__ == '__main__':
     root.title("Czasowy wyłącznik komputera")
     root.iconbitmap(default='img/time4.ico')
     root.config(bg="#2C3E50")
-    # root.geometry("650x400")
     app = Application(root)
     app.configure(background='#2C3E50')
     root.mainloop()
